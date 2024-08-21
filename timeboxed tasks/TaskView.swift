@@ -9,41 +9,39 @@ import SwiftUI
 
 struct TaskView: View {
     @Binding var task: Task
-    @State var timeboxMinutes: Int?
+    let taskInProgress: Bool
 
     private func timeFormat() -> some View {
         return HStack(spacing: 5) {
             if let remaining = task.remaining {
-                Text("\(remaining.formatted(.units(allowed: [.minutes]))) remaining from")
-                    .foregroundStyle(.gray)
+                Text("\(remaining.formatted(.units(allowed: [.minutes, .seconds], maximumUnitCount: 1))) remaining from ")
             }
-            TextField("0", value: $timeboxMinutes, format: .number)
+            TextField("0", value: $task.timeboxMins, format: .number)
                 .textFieldStyle(.plain)
                 .multilineTextAlignment(.trailing)
-                .frame(width: 24)
-                .onChange(of: timeboxMinutes) { _, newValue in
-                    print("timebox changed to \(newValue)")
-                    task.timebox = newValue.map({ .seconds($0 * 60) })
-                }
+                .frame(width: 30, alignment: .trailing)
             Text(" min")
         }
     }
+    
+    private func startStopToggle() -> some View {
+        let disabled = task.timeboxMins == nil || task.name == "" || (taskInProgress && !task.inProgress)
+
+        return Toggle(isOn: $task.inProgress) {}
+            .toggleStyle(StartStopToggleStyle(isDisabled: disabled))
+            .disabled(disabled)
+    }
 
     var body: some View {
-        Toggle(isOn: $task.completed) {
-            HStack{
-                TextField("New task", text: $task.name)
-                    .textFieldStyle(.plain)
-                Spacer()
-                timeFormat()
-            }
+        HStack {
+            Toggle(isOn: $task.completed) {}
+                .toggleStyle(CircleToggleStyle())
+            TextField("New task", text: $task.name)
+                .textFieldStyle(.plain)
+            Spacer()
+            timeFormat()
+            startStopToggle()
         }
-        .toggleStyle(CircleToggleStyle())
-    }
-    
-    init(task: Binding<Task>) {
-        self._task = task
-        self._timeboxMinutes = State(initialValue: task.wrappedValue.timebox.flatMap { Int($0.components.seconds) / 60 })
     }
 }
 
@@ -59,6 +57,23 @@ struct CircleToggleStyle: ToggleStyle {
     }
 }
 
+
+
+struct StartStopToggleStyle: ToggleStyle {
+    let isDisabled: Bool
+
+    func makeBody(configuration: Configuration) -> some View {
+        Button {
+            configuration.isOn.toggle()
+        } label: {
+            Image(systemName: configuration.isOn ? "pause.circle.fill" : "play.circle")
+                .font(.title2)
+                .foregroundStyle(self.isDisabled ? .gray : Color.accentColor)
+        }
+        .buttonStyle(.plain)
+    }
+}
+
 #Preview {
-    TaskView(task: .constant(Task()))
+    TaskView(task: .constant(Task()), taskInProgress: false)
 }

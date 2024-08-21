@@ -9,15 +9,15 @@ import SwiftUI
 
 struct TasksView: View {
     let title: String
-    @Binding var tasks: [Task]
+    @Binding var taskList: TaskList
 
     var body: some View {
-        List($tasks) { $task in
-            TaskView(task: $task)
+        List($taskList.tasks, editActions: .all) { $task in
+            TaskView(task: $task, taskInProgress: taskList.taskInProgress).deleteDisabled(task.inProgress)
         }
         .toolbar {
             Button {
-                tasks.append(Task())
+                taskList.tasks.append(Task())
             } label: {
                 Label("New Task", systemImage: "plus")
             }
@@ -26,5 +26,5 @@ struct TasksView: View {
 }
 
 #Preview {
-    TasksView(title: "Hello", tasks: .constant([Task(name: "Hello, world!", timebox: .seconds(120), elapsed: .seconds(60)), Task(name: "other", timebox: .seconds(180))]))
+    TasksView(title: "Hello", taskList: .constant(TaskList(tasks: [Task(name: "Hello, world!", timeboxMins: 120, elapsed: .seconds(60)), Task(name: "other", timeboxMins: 120)])))
 }

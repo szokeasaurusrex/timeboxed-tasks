@@ -9,23 +9,23 @@ import Foundation
 import SwiftData
 
 //@Model
-final class Task: Identifiable {
+@Observable final class Task: Identifiable {
     let id = UUID()
     var name: String
-    var timebox: Duration?
+    var timeboxMins: Int?
     var elapsed: Duration
-    var completed: Bool
+    var completed: Bool = false
+    var inProgress: Bool = false
     
-    init(name: String = "", timebox: Duration? = nil, elapsed: Duration = .seconds(0), completed: Bool = false) {
+    init(name: String = "", timeboxMins: Int? = nil, elapsed: Duration = .seconds(0)) {
         self.name = name
-        self.timebox = timebox
+        self.timeboxMins = timeboxMins
         self.elapsed = elapsed
-        self.completed = completed
     }
     
     var remaining: Duration? {
         get {
-            return self.timebox.map({ max($0 - self.elapsed, .zero) })
+            return self.timeboxMins.map({ max(.seconds($0 * 60) - self.elapsed, .zero) })
         }
     }
 }

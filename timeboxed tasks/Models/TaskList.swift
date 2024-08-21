@@ -6,3 +6,20 @@
 //
 
 import Foundation
+
+
+@Observable final class TaskList {
+    var tasks: [Task] = []
+    
+    var taskInProgress: Bool {
+        get {
+            tasks.contains { $0.inProgress }
+        }
+    }
+    
+    init() {}
+    
+    init(tasks: [Task]) {
+        self.tasks = tasks
+    }
+}
