@@ -15,10 +15,11 @@
 		8A17E4C02C734B380084F489 /* timeboxed_tasksTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A17E4BF2C734B380084F489 /* timeboxed_tasksTests.swift */; };
 		8A17E4CA2C734B380084F489 /* timeboxed_tasksUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A17E4C92C734B380084F489 /* timeboxed_tasksUITests.swift */; };
 		8A17E4CC2C734B380084F489 /* timeboxed_tasksUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A17E4CB2C734B380084F489 /* timeboxed_tasksUITestsLaunchTests.swift */; };
-		8A17E4D92C736FD40084F489 /* TasksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A17E4D82C736FD40084F489 /* TasksView.swift */; };
+		8A17E4D92C736FD40084F489 /* TaskListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A17E4D82C736FD40084F489 /* TaskListView.swift */; };
 		8A17E4DC2C7370F90084F489 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A17E4DB2C7370F90084F489 /* Task.swift */; };
 		8A17E4DE2C73829F0084F489 /* TaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A17E4DD2C73829F0084F489 /* TaskView.swift */; };
 		8A7616662C75EC3700ABD955 /* TaskList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7616652C75EC3700ABD955 /* TaskList.swift */; };
+		8AE9DF272C761A4C003AC5A4 /* TaskTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE9DF262C761A4C003AC5A4 /* TaskTimerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,10 +52,11 @@
 		8A17E4C52C734B380084F489 /* timeboxed tasksUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "timeboxed tasksUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A17E4C92C734B380084F489 /* timeboxed_tasksUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = timeboxed_tasksUITests.swift; sourceTree = "<group>"; };
 		8A17E4CB2C734B380084F489 /* timeboxed_tasksUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = timeboxed_tasksUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		8A17E4D82C736FD40084F489 /* TasksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksView.swift; sourceTree = "<group>"; };
+		8A17E4D82C736FD40084F489 /* TaskListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListView.swift; sourceTree = "<group>"; };
 		8A17E4DB2C7370F90084F489 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		8A17E4DD2C73829F0084F489 /* TaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskView.swift; sourceTree = "<group>"; };
 		8A7616652C75EC3700ABD955 /* TaskList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskList.swift; sourceTree = "<group>"; };
+		8AE9DF262C761A4C003AC5A4 /* TaskTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTimerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,8 +114,9 @@
 				8A17E4B12C734B380084F489 /* Assets.xcassets */,
 				8A17E4B62C734B380084F489 /* timeboxed_tasks.entitlements */,
 				8A17E4B32C734B380084F489 /* Preview Content */,
-				8A17E4D82C736FD40084F489 /* TasksView.swift */,
+				8A17E4D82C736FD40084F489 /* TaskListView.swift */,
 				8A17E4DD2C73829F0084F489 /* TaskView.swift */,
+				8AE9DF262C761A4C003AC5A4 /* TaskTimerView.swift */,
 			);
 			path = "timeboxed tasks";
 			sourceTree = "<group>";
@@ -287,8 +290,9 @@
 				8A17E4B02C734B360084F489 /* Item.swift in Sources */,
 				8A17E4DC2C7370F90084F489 /* Task.swift in Sources */,
 				8A17E4DE2C73829F0084F489 /* TaskView.swift in Sources */,
+				8AE9DF272C761A4C003AC5A4 /* TaskTimerView.swift in Sources */,
 				8A17E4AC2C734B360084F489 /* timeboxed_tasksApp.swift in Sources */,
-				8A17E4D92C736FD40084F489 /* TasksView.swift in Sources */,
+				8A17E4D92C736FD40084F489 /* TaskListView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

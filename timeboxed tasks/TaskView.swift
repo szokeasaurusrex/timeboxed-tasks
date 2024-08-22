@@ -10,26 +10,25 @@ import SwiftUI
 struct TaskView: View {
     @Binding var task: Task
     let taskInProgress: Bool
+    var countdownTimer: Timer?
+
 
     private func timeFormat() -> some View {
         return HStack(spacing: 5) {
-            if let remaining = task.remaining {
-                Text("\(remaining.formatted(.units(allowed: [.minutes, .seconds], maximumUnitCount: 1))) remaining from ")
+            if task.remaining != nil && task.elapsed > .zero {
+                Text("\(task.remaining!.formatted(.units(allowed: [.minutes, .seconds], maximumUnitCount: 1, fractionalPart: .hide(rounded: .towardZero)))) remaining from ")
             }
             TextField("0", value: $task.timeboxMins, format: .number)
+                .onChange(of: task.timeboxMins) { oldValue, newValue in
+                    if oldValue != newValue {
+                        task.elapsed = .zero
+                    }
+                }
                 .textFieldStyle(.plain)
                 .multilineTextAlignment(.trailing)
                 .frame(width: 30, alignment: .trailing)
             Text(" min")
         }
-    }
-    
-    private func startStopToggle() -> some View {
-        let disabled = task.timeboxMins == nil || task.name == "" || (taskInProgress && !task.inProgress)
-
-        return Toggle(isOn: $task.inProgress) {}
-            .toggleStyle(StartStopToggleStyle(isDisabled: disabled))
-            .disabled(disabled)
     }
 
     var body: some View {
@@ -40,7 +39,7 @@ struct TaskView: View {
                 .textFieldStyle(.plain)
             Spacer()
             timeFormat()
-            startStopToggle()
+            TaskTimerView(task: $task, taskInProgress: taskInProgress)
         }
     }
 }
@@ -54,23 +53,6 @@ struct CircleToggleStyle: ToggleStyle {
                 }
             configuration.label
         }
-    }
-}
-
-
-
-struct StartStopToggleStyle: ToggleStyle {
-    let isDisabled: Bool
-
-    func makeBody(configuration: Configuration) -> some View {
-        Button {
-            configuration.isOn.toggle()
-        } label: {
-            Image(systemName: configuration.isOn ? "pause.circle.fill" : "play.circle")
-                .font(.title2)
-                .foregroundStyle(self.isDisabled ? .gray : Color.accentColor)
-        }
-        .buttonStyle(.plain)
     }
 }
 

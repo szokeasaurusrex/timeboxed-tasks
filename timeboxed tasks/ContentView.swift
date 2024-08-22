@@ -15,7 +15,7 @@ struct ContentView: View {
     @State private var taskList: TaskList = TaskList()
 
     var body: some View {
-        TasksView(title: "hi", taskList: $taskList)//.task({ await self.requestNotifications() })
+        TaskListView(title: "hi", taskList: $taskList)//.task({ await self.requestNotifications() })
     }
     
 //    private func requestNotifications() async {
